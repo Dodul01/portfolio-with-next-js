@@ -1,8 +1,11 @@
-import { Github, Projector } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
-const ProjectsPage = () => {
+const ProjectDetailsPage = async ({
+  params,
+}: {
+  params: Promise<{ projectId: string }>;
+}) => {
+  const { projectId } = await params;
   const projects = [
     {
       id: "01",
@@ -101,62 +104,25 @@ const ProjectsPage = () => {
         "https://cdn.dribbble.com/userupload/13551434/file/original-8e87467f2d04d630dd655e8f94a2a13b.png?resize=1024x768&vertical=center",
     },
   ];
+  const project = projects.find((pj) => pj.id === projectId);
 
   return (
-    <div>
-      <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-t from-transparent to-[#021035] bg-opacity-30 -z-10"></div>
-
-      <header className="my-11">
-        <h1 className="text-4xl text-center">
-          Drive into creativity <br /> with my projects collection
-        </h1>
-      </header>
-
-      <main className="m-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {projects.map((project, idx) => (
-            <div
-              key={idx}
-              className="bg-[#021035] bg-opacity-50 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-300"
-            >
-              <div className="relative h-56">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-300 hover:scale-110"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-white">{project.description}</p>
-                <div className="flex items-center justify-start gap-4 mt-3">
-                  <Link href={`/projects/${project.id}`}>
-                    <button className="cursor-pointer rounded-lg font-semibold overflow-hidden relative z-100 border border-white group px-8 py-2">
-                      <span className="flex items-center text-sm gap-2 relative z-10 text-white group-hover:text-black duration-500">
-                        <Projector /> Project Details
-                      </span>
-                      <span className="absolute w-full h-full bg-white -left-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:left-0 duration-500"></span>
-                      <span className="absolute w-full h-full bg-white -right-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:right-0 duration-500"></span>
-                    </button>
-                  </Link>
-                  <button className="cursor-pointer rounded-lg font-semibold overflow-hidden relative z-100 border border-white group px-8 py-2">
-                    <span className="flex items-center text-sm gap-2 relative z-10 text-white group-hover:text-black duration-500">
-                      <Github /> Github
-                    </span>
-                    <span className="absolute w-full h-full bg-white -left-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:left-0 duration-500"></span>
-                    <span className="absolute w-full h-full bg-white -right-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:right-0 duration-500"></span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+    <div className="max-w-7xl mx-auto">
+      <div className="flex flex-wrap my-12 gap-12 mx-4">
+        <Image
+          className="flex-1 w-full h-full object-cover bg-center"
+          src={project?.image || "https://placehold.co/600x400"}
+          height={300}
+          width={300}
+          alt={project?.title || "Project Title go here."}
+        />
+        <div>
+          <h1 className="text-3xl">{project?.title}</h1>
+          <h1 className="text-lg">{project?.description}</h1>
         </div>
-      </main>
+      </div>
     </div>
   );
 };
 
-export default ProjectsPage;
+export default ProjectDetailsPage;
