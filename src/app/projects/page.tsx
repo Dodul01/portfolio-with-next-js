@@ -106,7 +106,7 @@ const ProjectsPage = () => {
     <div>
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-t from-transparent to-[#021035] bg-opacity-30 -z-10"></div>
 
-      <header className="my-11">
+      <header className="my-20">
         <h1 className="text-4xl text-center">
           Drive into creativity <br /> with my projects collection
         </h1>

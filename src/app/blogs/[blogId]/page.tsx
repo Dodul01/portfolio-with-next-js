@@ -1,8 +1,11 @@
-import { FileSpreadsheet } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const BlogsPage = () => {
+const BlogDetailsPage = async ({
+  params,
+}: {
+  params: Promise<{ blogId: string }>;
+}) => {
   const blogs = [
     {
       id: "01",
@@ -115,63 +118,56 @@ const BlogsPage = () => {
       postDate: "2023-06-15",
     },
   ];
+  const { blogId } = await params;
+
+  const blog = blogs.find((b) => b.id === blogId);
+  const otherBlogs = blogs.filter((b) => b.id !== blogId);
 
   return (
-    <div>
+    <div className="max-w-7xl mx-auto my-12 flex flex-col md:flex-row gap-12 px-6">
       <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-t from-transparent to-[#021035] bg-opacity-30 -z-10"></div>
 
-      <header className="my-20">
-        <h1 className="text-4xl text-center">
-          Expending My Knowledge & Yours
-          <br /> One Blog at a Time
-        </h1>
-      </header>
+      {/* Blog Content */}
+      <div className="md:w-2/3">
+        <div className="relative w-full h-96 mb-6">
+          <Image
+            className="rounded-xl object-cover"
+            src={blog?.image || "https://placehold.co/600x400"}
+            layout="fill"
+            alt={blog?.title || "Blog Image"}
+          />
+        </div>
+        <h1 className="text-4xl font-bold mb-4 ">{blog?.title}</h1>
+        <p className="text-gray-600 mb-4">
+          By {blog?.author} | {blog?.postDate}
+        </p>
+        <p className="text-lg leading-relaxed">{blog?.description}</p>
+      </div>
 
-      <main className="m-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {blogs.map((blogs, idx) => (
-            <div
-              key={idx}
-              className="bg-[#021035] bg-opacity-50 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-300"
-            >
-              <div className="relative h-56">
+      {/* More Blogs */}
+      <aside className="md:w-1/3">
+        <h2 className="text-2xl font-semibold mb-4">More Blogs</h2>
+        <div className="space-y-6">
+          {otherBlogs.map((b) => (
+            <Link key={b.id} href={`/blogs/${b.id}`} className="flex gap-4">
+              <div className="w-24 h-24 relative">
                 <Image
-                  src={blogs.image}
-                  alt={blogs.title}
-                  fill
-                  className="object-cover transition-transform duration-300 hover:scale-110"
+                  src={b.image}
+                  layout="fill"
+                  className="w-28 rounded-lg object-cover"
+                  alt={b.title}
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  {blogs.title}
-                </h3>
-                <p className="text-white">{blogs.description}</p>
-                <div className="flex items-center justify-start gap-4 mt-3">
-                  <Link href={`/blogs/${blogs.id}`}>
-                    <button className="cursor-pointer rounded-lg font-semibold overflow-hidden relative z-100 border border-white group px-8 py-2">
-                      <span className="flex items-center text-sm gap-2 relative z-10 text-white group-hover:text-black duration-500">
-                        <FileSpreadsheet /> Read More
-                      </span>
-                      <span className="absolute w-full h-full bg-white -left-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:left-0 duration-500"></span>
-                      <span className="absolute w-full h-full bg-white -right-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:right-0 duration-500"></span>
-                    </button>
-                  </Link>
-                  {/* <button className="cursor-pointer rounded-lg font-semibold overflow-hidden relative z-100 border border-white group px-8 py-2">
-                    <span className="flex items-center text-sm gap-2 relative z-10 text-white group-hover:text-black duration-500">
-                      <Github /> Github
-                    </span>
-                    <span className="absolute w-full h-full bg-white -left-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:left-0 duration-500"></span>
-                    <span className="absolute w-full h-full bg-white -right-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:right-0 duration-500"></span>
-                  </button> */}
-                </div>
+              <div>
+                <h3 className="text-lg font-medium">{b.title}</h3>
+                <p className="text-gray-500 text-sm">By {b.author}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
-      </main>
+      </aside>
     </div>
   );
 };
 
-export default BlogsPage;
+export default BlogDetailsPage;
