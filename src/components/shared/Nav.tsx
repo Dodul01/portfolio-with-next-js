@@ -1,56 +1,14 @@
-// import Link from "next/link";
-
-// /**
-//  * home page
-//  * project page
-//  * blog page
-//  * contact page
-//  * login page [not sure]
-//  * register page [not sure]
-//  *
-//  * */
-// const Nav = () => {
-//   const links = [
-//     { href: "/", label: "Home" },
-//     { href: "/projects", label: "Projects" },
-//     { href: "/blogs", label: "Blogs" },
-//     { href: "/contact", label: "Contact" },
-//     { href: "/login", label: "Log In" },
-//     // { href: "/register", label: "Register" },
-//   ];
-
-//   return (
-//     <nav className="flex items-center justify-between py-4 mx-3 border-b border-gray-500">
-//       <div>
-//         <span>MH</span> DODUL
-//       </div>
-//       <div className="flex items-center gap-4">
-//         {links.map(({ href, label }) => (
-//           <Link key={href} href={href}>
-//             {label}
-//           </Link>
-//         ))}
-//         <button className="w-44 h-12 text-white relative overflow-hidden group z-10 border border-gray-400 rounded-full hover:border-transparent hover:text-white duration-1000">
-//           <span className="absolute bg-[#021035] w-48 h-36 rounded-full group-hover:scale-100 scale-0 -z-10 -left-2 -top-10 group-hover:duration-500 duration-700 origin-center transform transition-all"></span>
-//           <span className="absolute bg-[#0B2E82] w-48 h-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
-//           Download Resume
-//         </button>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default Nav;
-
 "use client";
 
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
+  const pathname = usePathname();
 
   const links = [
     { href: "/", label: "Home" },
@@ -61,10 +19,13 @@ const Nav = () => {
   ];
 
   return (
-    <nav className="relative flex items-center justify-between py-4 px-6 border-b border-gray-500 bg-black text-white">
+    <nav
+      className={`relative ${
+        pathname === "/dashboard" ? "hidden" : "flex"
+      }  items-center justify-between py-4 px-6 border-b border-gray-500 bg-black text-white`}
+    >
       <div className="text-xl font-bold">MH DODUL</div>
 
-      {/* Desktop Menu */}
       <div className="hidden md:flex items-center gap-6">
         {links.map(({ href, label }) => (
           <Link
