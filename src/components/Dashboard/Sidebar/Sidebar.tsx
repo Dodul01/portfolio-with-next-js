@@ -1,68 +1,3 @@
-// "use client";
-
-// import { useState } from "react";
-// import Link from "next/link";
-// import { FileText, Briefcase, Mail, Menu } from "lucide-react";
-
-// const Sidebar = () => {
-//   const [isCollapsed, setIsCollapsed] = useState(false);
-
-//   const menuItems = [
-//     {
-//       label: "Blog Management",
-//       route: "/dashboard/blogs",
-//       icon: <FileText size={24} />,
-//     },
-//     {
-//       label: "Project Management",
-//       route: "/dashboard/projects",
-
-//       icon: <Briefcase size={24} />,
-//     },
-//     {
-//       label: "Message Management",
-//       route: "/dashboard/messages",
-//       icon: <Mail size={24} />,
-//     },
-//   ];
-
-//   return (
-//     <aside
-//       className={`bg-gray-800 text-white h-screen p-4 ${
-//         isCollapsed ? "w-20" : "w-64"
-//       } transition-all duration-300`}
-//     >
-//       {/* Toggle Button */}
-//       <div className="flex justify-end">
-//         <button
-//           onClick={() => setIsCollapsed(!isCollapsed)}
-//           className="text-white focus:outline-none"
-//           aria-label="Toggle sidebar"
-//         >
-//           <Menu />
-//         </button>
-//       </div>
-
-//       {/* Navigation Menu */}
-//       <nav className="mt-8 space-y-4">
-//         {menuItems.map((item) => (
-//           <Link key={item.route} href={item.route}>
-//             <div className="flex items-center gap-4 p-2 hover:bg-gray-700 rounded-md cursor-pointer">
-//               <div>{item.icon}</div>
-//               {!isCollapsed && (
-//                 <div className="flex flex-col">
-//                   <span className="font-semibold">{item.label}</span>
-//                 </div>
-//               )}
-//             </div>
-//           </Link>
-//         ))}
-//       </nav>
-//     </aside>
-//   );
-// };
-
-// export default Sidebar;
 "use client";
 
 import { useState } from "react";
@@ -96,7 +31,6 @@ const Sidebar = () => {
       label: "Messages",
       route: "/dashboard/messages",
       icon: <Mail size={24} />,
-      subItems: [{ label: "Inbox", route: "/dashboard/messages" }],
     },
   ];
 

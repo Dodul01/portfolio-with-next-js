@@ -1,5 +1,6 @@
 import Sidebar from "@/components/Dashboard/Sidebar/Sidebar";
 import type { Metadata } from "next";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Next Auth Dashboard",
@@ -18,6 +19,7 @@ export default function DashboardLayout({
           <Sidebar />
         </div>
         <div className="w-[80%] rounded-xl ml-2">{children}</div>
+        <Toaster />
       </div>
     </div>
   );

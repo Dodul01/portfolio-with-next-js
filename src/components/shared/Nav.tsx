@@ -21,7 +21,14 @@ const Nav = () => {
   return (
     <nav
       className={`relative ${
-        pathname === "/dashboard" ? "hidden" : "flex"
+        pathname === "/dashboard" ||
+        "/dashboard/blogs" ||
+        "/dashboard/blogs/create" ||
+        "/dashboard/projects" ||
+        "/dashboard/projects/create" ||
+        "/dashboard/messages"
+          ? "hidden"
+          : "flex"
       }  items-center justify-between py-4 px-6 border-b border-gray-500 bg-black text-white`}
     >
       <div className="text-xl font-bold">MH DODUL</div>

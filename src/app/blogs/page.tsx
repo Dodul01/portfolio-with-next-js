@@ -157,13 +157,6 @@ const BlogsPage = () => {
                       <span className="absolute w-full h-full bg-white -right-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:right-0 duration-500"></span>
                     </button>
                   </Link>
-                  {/* <button className="cursor-pointer rounded-lg font-semibold overflow-hidden relative z-100 border border-white group px-8 py-2">
-                    <span className="flex items-center text-sm gap-2 relative z-10 text-white group-hover:text-black duration-500">
-                      <Github /> Github
-                    </span>
-                    <span className="absolute w-full h-full bg-white -left-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:left-0 duration-500"></span>
-                    <span className="absolute w-full h-full bg-white -right-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:right-0 duration-500"></span>
-                  </button> */}
                 </div>
               </div>
             </div>
